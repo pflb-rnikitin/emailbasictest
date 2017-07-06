@@ -11,7 +11,7 @@ public class MailFunctionalityTest extends Steps{
 
     @BeforeMethod
     public void setUp() {
-        driver = new ChromeDriver();
+        //driver = new ChromeDriver();
         //driver.get(Constants.BASE_URL);
     }
 

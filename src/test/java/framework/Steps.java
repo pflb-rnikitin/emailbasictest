@@ -8,17 +8,17 @@ import pages.LoginPage;
 import pages.MainPage;
 
 public class Steps extends BaseTest {
-    private static WebDriver driver;
+    public WebDriver driver = new ChromeDriver();
     private static MainPage mainPage;
 
-    protected void login(String username, String password){
+    public void login(String username, String password){
         driver.manage().window().maximize();
         driver.get(Constants.BASE_URL);
         LoginPage loginPage = new LoginPage(driver);
         BaseTest.sendKeys(loginPage.loginField, username);
         BaseTest.sendKeys(loginPage.passwordField, password);
         BaseTest.click(loginPage.loginButton);
-        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(mainPage.loggedUserName));
+        //new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(mainPage.loggedUserName));
     }
 
 /*    protected static void createPerson(String FirstName, String LastName) throws InterruptedException {
