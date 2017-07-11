@@ -10,7 +10,7 @@ public class BaseTest {
     protected static void click(WebElement element){
        // String title = element.getClass().getAnnotation(ElementTitle.class).title();
        // String message = String.format("Click on element %d", title);
-        String message = "hi";
+        String message = "click";
         log.info(message);
         element.click();
     }
