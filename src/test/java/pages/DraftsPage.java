@@ -15,14 +15,9 @@ public class DraftsPage {
     @FindBy(how= How.CSS, using = "div.ns-view-toolbar-button-add-template")
     public WebElement createTemplateButton;
 
-    @FindBy (how=How.CSS, using = "div.ns-view-messages-item-wrap:first-child span.mail-MessageSnippet-FromText")
-    public WebElement firstDraftRecipient;
-
     @FindBy (how=How.CSS, using = "div.ns-view-messages-item-wrap:first-child span.mail-MessageSnippet-Item_subject > span")
     public WebElement firstDraftSubject;
 
-    @FindBy (how=How.CSS, using = "div.ns-view-messages-item-wrap:first-child span.mail-MessageSnippet-Item_firstline > span")
-    public WebElement firstDraftContent;
 
     @FindBy (how=How.CSS, using = "div.ns-view-messages div.ns-view-messages-item-wrap:first-child")
     public WebElement firstDraftMessageArea;
