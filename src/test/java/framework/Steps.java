@@ -37,8 +37,8 @@ public class Steps extends BaseTest {
         wait.until(ExpectedConditions.textToBePresentInElement((mainPage.loggedUserName), "s"));*/
     }
 
-    protected ArrayList<String> createADraftMessage(String to, String subject, String content) {
-        wait.until(ExpectedConditions.elementToBeClickable(mainPage.composeButton));
+    protected void createADraftMessage(String to, String subject, String content) {
+/*        wait.until(ExpectedConditions.elementToBeClickable(mainPage.composeButton));
         BaseTest.click(mainPage.composeButton);
         wait.until(ExpectedConditions.elementToBeClickable(mainPage.contentField));
         BaseTest.sendKeys(mainPage.composeField, to);
@@ -57,7 +57,7 @@ public class Steps extends BaseTest {
         list.add(draftsPage.firstDraftRecipient.getAttribute("title"));
         list.add(draftsPage.firstDraftSubject.getAttribute("title"));
         list.add(draftsPage.firstDraftContent.getAttribute("title"));
-        return list;
+        return list;*/
     }
 
     protected ArrayList<String> sendADraftMessage(String to, String subject, String content) {

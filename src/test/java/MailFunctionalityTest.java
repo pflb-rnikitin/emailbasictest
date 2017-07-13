@@ -25,9 +25,10 @@ import java.util.Date;
 
 import static framework.Constants.LOGIN;
 import static framework.Constants.PASSWORD;
+import static org.openqa.selenium.support.ui.ExpectedConditions.attributeToBe;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
 
-public class MailFunctionalityTest extends Steps {
+public class MailFunctionalityTest extends BaseTest {
 
     private String getTimeStamp() {
         Date currentDate = new Date();
@@ -46,23 +47,32 @@ public class MailFunctionalityTest extends Steps {
 
     @Test
     public void loginTest() {
-        loginPage = new LoginPage(BaseTest.driver);
-        BaseTest.sendKeys(loginPage.loginField, LOGIN);
-        BaseTest.sendKeys(loginPage.passwordField, PASSWORD);
-        BaseTest.click(loginPage.loginButton);
-        mainPage = new MainPage(BaseTest.driver);
-        assertThat(textToBePresentInElement((mainPage.loggedUserName), "v.m.varga"));
+        loginPage = new LoginPage(driver);
+        sendKeys(loginPage.loginField, LOGIN);
+        sendKeys(loginPage.passwordField, PASSWORD);
+        click(loginPage.loginButton);
+        mainPage = new MainPage(driver);
+        assertThat(textToBePresentInElement(mainPage.loggedUserName, "v.m.varga"));
     }
 
     @Test(dependsOnMethods = {"loginTest"}, priority = 1)
     public void newDraftMessageTest() {
-        ArrayList<String> testList = createADraftMessage(to, subject, content);
-        Assert.assertEquals(testList.get(0), to);
-        Assert.assertEquals(testList.get(1), subject);
-        Assert.assertEquals(testList.get(2), content);
+        wait.until(ExpectedConditions.elementToBeClickable(mainPage.composeButton));
+        click(mainPage.composeButton);
+        wait.until(ExpectedConditions.elementToBeClickable(mainPage.contentField));
+        sendKeys(mainPage.composeField, to);
+        sendKeys(mainPage.subjectField, subject);
+        sendKeys(mainPage.contentField, content);
+        click(mainPage.composeCancelButton);
+        wait.until(ExpectedConditions.elementToBeClickable(mainPage.saveDraftButton));
+        click(mainPage.saveDraftButton);
+        click(mainPage.draftsMenuButton);
+        draftsPage = new DraftsPage(driver);
+        wait.until(ExpectedConditions.elementToBeClickable(draftsPage.createTemplateButton));
+        assertThat(attributeToBe(draftsPage.firstDraftSubject, "title", subject));
     }
 
-    @Test(dependsOnMethods = {"loginTest", "newDraftMessageTest"}, priority = 2)
+/*    @Test(dependsOnMethods = {"loginTest", "newDraftMessageTest"}, priority = 2)
     public void draftIsSentTest() throws InterruptedException {
         ArrayList<String> testList = sendADraftMessage(to, subject, content);
         Assert.assertEquals(testList.get(0), to);
@@ -82,5 +92,5 @@ public class MailFunctionalityTest extends Steps {
     public void logoutTest() {
         boolean b = logout();
         Assert.assertEquals(true, b);
-    }
+    }*/
 }
