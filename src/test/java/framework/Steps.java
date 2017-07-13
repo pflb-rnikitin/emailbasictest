@@ -26,16 +26,15 @@ public class Steps extends BaseTest {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    protected String login(String username, String password) {
-        driver.manage().window().maximize();
+    protected void login(String username, String password) {
+/*        driver.manage().window().maximize();
         driver.get(Constants.BASE_URL);
         loginPage = new LoginPage(driver);
         BaseTest.sendKeys(loginPage.loginField, username);
         BaseTest.sendKeys(loginPage.passwordField, password);
         BaseTest.click(loginPage.loginButton);
         mainPage = new MainPage(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(mainPage.loggedUserName));
-        return mainPage.loggedUserName.getText();
+        wait.until(ExpectedConditions.textToBePresentInElement((mainPage.loggedUserName), "s"));*/
     }
 
     protected ArrayList<String> createADraftMessage(String to, String subject, String content) {
@@ -67,6 +66,7 @@ public class Steps extends BaseTest {
         BaseTest.click(draftsPage.sendButton);
         SentPage sentPage = new SentPage(driver);
         BaseTest.click(mainPage.sentMenuButton);
+
         wait.until(ExpectedConditions.attributeToBe(sentPage.firstSentMessageRecipient, "title", to));
         wait.until(ExpectedConditions.attributeToBe(sentPage.firstSentMessageSubject, "title", subject));
         wait.until(ExpectedConditions.attributeToBe(sentPage.firstSentMessageContent, "title", content));
@@ -104,8 +104,8 @@ public class Steps extends BaseTest {
     }
 
     protected void closeBrowser() {
-        if (driver != null)
-            driver.quit();
+/*        if (driver != null)
+            driver.quit();*/
     }
 
 }
