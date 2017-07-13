@@ -1,6 +1,5 @@
 import framework.BaseTest;
 import framework.Constants;
-import framework.Steps;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -36,13 +35,12 @@ public class MailFunctionalityTest extends BaseTest {
         return timeStamp;
     }
 
-    private String to = "testingexperience@gmail.com";
+    private String to = "enthao@gmail.com";
     private String subject = getTimeStamp();
     private String content = "message body";
     private static MainPage mainPage;
     private static LoginPage loginPage;
     private static DraftsPage draftsPage;
-
 
 
     @Test
@@ -72,25 +70,31 @@ public class MailFunctionalityTest extends BaseTest {
         assertThat(attributeToBe(draftsPage.firstDraftSubject, "title", subject));
     }
 
-/*    @Test(dependsOnMethods = {"loginTest", "newDraftMessageTest"}, priority = 2)
-    public void draftIsSentTest() throws InterruptedException {
-        ArrayList<String> testList = sendADraftMessage(to, subject, content);
-        Assert.assertEquals(testList.get(0), to);
-        Assert.assertEquals(testList.get(1), subject);
-        Assert.assertEquals(testList.get(2), content);
+    @Test(dependsOnMethods = {"loginTest", "newDraftMessageTest"}, priority = 2)
+    public void verifyDraftIsSent() throws InterruptedException {
+        click(draftsPage.firstDraftMessageArea);
+        wait.until(ExpectedConditions.elementToBeClickable(draftsPage.sendButton));
+        click(draftsPage.sendButton);
+        SentPage sentPage = new SentPage(driver);
+        click(mainPage.sentMenuButton);
+        assertThat(attributeToBe(sentPage.firstSentMessageSubject, "title", subject));
     }
 
-    @Test(dependsOnMethods = {"loginTest", "newDraftMessageTest", "draftIsSentTest"}, priority = 3)
+    @Test(dependsOnMethods = {"loginTest", "newDraftMessageTest", "verifyDraftIsSent"}, priority = 3)
     public void thereIsNoDraftLeftTest() {
-        ArrayList<String> testList = getLastDraft(to, subject, content);
-        Assert.assertNotEquals(testList.get(0), to);
-        Assert.assertNotEquals(testList.get(1), subject);
-        Assert.assertNotEquals(testList.get(2), content);
+        click(mainPage.draftsMenuButton);
+        refresh();
+        assertThat(ExpectedConditions.not(attributeToBe(draftsPage.firstDraftSubject, "title", subject)));
     }
 
     @Test(dependsOnMethods = {"loginTest"}, priority = 4)
     public void logoutTest() {
-        boolean b = logout();
-        Assert.assertEquals(true, b);
-    }*/
+        click(mainPage.userMenuButton);
+        wait.until(ExpectedConditions.elementToBeClickable(mainPage.userMenuButton));
+        click(mainPage.userMenuButton);
+        wait.until(ExpectedConditions.elementToBeClickable(mainPage.logoutMenuButton));
+        click(mainPage.logoutMenuButton);
+        wait.until(ExpectedConditions.elementToBeClickable(loginPage.loginButton));
+        Assert.assertTrue(loginPage.loginButton.isDisplayed());
+    }
 }

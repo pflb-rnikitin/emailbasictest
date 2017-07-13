@@ -14,10 +14,9 @@ import java.util.concurrent.TimeUnit;
 
 
 public class BaseTest {
+    protected static final Logger log = LogManager.getLogger(BaseTest.class);
     protected static WebDriver driver = new ChromeDriver();
     protected static WebDriverWait wait = new WebDriverWait(driver, 30);
-    protected static final Logger log = LogManager.getLogger(BaseTest.class);
-
 
     @BeforeClass
     public void setUp() {
@@ -27,23 +26,25 @@ public class BaseTest {
     }
 
     protected static void click(WebElement element) {
-        // String title = element.getClass().getAnnotation(ElementTitle.class).title();
-        // String message = String.format("Click on element %d", title);
-        String message = "hi";
+        String title = element.toString();
+        String message = String.format("Click on element %s", title);
         log.info(message);
         element.click();
     }
 
     protected static void sendKeys(WebElement element, String text) {
-        //String title = element.getClass().getAnnotation(ElementTitle.class).title();
-        //  String message = String.format("Enter %d in element %d",text,title);
-        String message = "hi";
+        String title = element.toString();
+        String message = String.format("Enter %s in element %s", text, title);
         log.info(message);
         element.sendKeys(text);
     }
 
-    protected static void assertThat(ExpectedCondition<Boolean> condition){
+    protected static void assertThat(ExpectedCondition<Boolean> condition) {
         wait.until(condition);
+    }
+
+    protected static void refresh() {
+        driver.navigate().refresh();
     }
 
     @AfterClass
