@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import static framework.Constants.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
 
-public class MainPage extends BaseTest{
+public class MainPage extends BaseTest {
     WebDriver driver;
 
     @FindBy(how = How.CSS, using = "div.mail-User-Name")

@@ -14,13 +14,13 @@ import static framework.Constants.draftsMenuButtonTitle;
 /**
  * Created by Nikitin Ruslan on 07.07.2017.
  */
-public class SentPage extends BaseTest{
+public class SentPage extends BaseTest {
     WebDriver driver;
 
-    @FindBy(how= How.CSS, using = " div.ns-view-messages div.ns-view-messages-item-wrap:first-child")
+    @FindBy(how = How.CSS, using = " div.ns-view-messages div.ns-view-messages-item-wrap:first-child")
     public WebElement firstSentMessageArea;
 
-    @FindBy (how=How.CSS, using = "div.ns-view-messages-item-wrap:first-child span.mail-MessageSnippet-Item_subject > span")
+    @FindBy(how = How.CSS, using = "div.ns-view-messages-item-wrap:first-child span.mail-MessageSnippet-Item_subject > span")
     public WebElement firstSentMessageSubject;
 
     @FindBy(how = How.CSS, using = "a[href='#draft']")
@@ -31,7 +31,7 @@ public class SentPage extends BaseTest{
         PageFactory.initElements(driver, this);
     }
 
-    public void verifyFirstSentMessageSubject(String subject) throws TimeoutException{
+    public void verifyFirstSentMessageSubject(String subject) throws TimeoutException {
         try {
             wait.until(ExpectedConditions.attributeToBe(firstSentMessageSubject, "title", subject));
         } catch (TimeoutException e) {
