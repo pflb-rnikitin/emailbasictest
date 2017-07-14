@@ -36,6 +36,7 @@ public class SentPage extends BaseTest{
             wait.until(ExpectedConditions.attributeToBe(firstSentMessageSubject, "title", subject));
         } catch (TimeoutException e) {
             throw e;
+
         }
     }
 

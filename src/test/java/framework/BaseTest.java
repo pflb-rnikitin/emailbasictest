@@ -2,18 +2,13 @@ package framework;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import pages.DraftsPage;
-import pages.LoginPage;
-import pages.MainPage;
-import pages.SentPage;
+
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,17 +17,13 @@ public class BaseTest {
     protected static final Logger log = LogManager.getLogger(BaseTest.class);
     protected static WebDriver driver = new ChromeDriver();
     protected static WebDriverWait wait = new WebDriverWait(driver, 30);
-    protected static LoginPage loginPage;
-    protected static MainPage mainPage;
-    protected static DraftsPage draftsPage;
-    protected static SentPage sentPage;
+
 
     @BeforeClass
     public void setUp() {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get(Constants.BASE_URL);
-        sentPage = new SentPage(driver);
     }
 
     protected static void click(WebElement element, String title) {

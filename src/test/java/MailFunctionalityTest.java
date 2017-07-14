@@ -26,6 +26,9 @@ public class MailFunctionalityTest extends BaseTest {
     private String subject = getTimeStamp();
     private String content = "message body";
     private LoginPage loginPage;
+    private MainPage mainPage;
+    private DraftsPage draftsPage;
+    private SentPage sentPage;
 
     @Test
     public void loginTest() {
