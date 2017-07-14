@@ -45,7 +45,6 @@ public class MailFunctionalityTest extends BaseTest {
         draftsPage = new DraftsPage(driver);
         draftsPage.sendFirstDraft();
         draftsPage.goToSent().verifyFirstSentMessageSubject(subject);
-
     }
 
     @Test(dependsOnMethods = {"loginTest", "newDraftMessageTest", "verifyDraftIsSent"}, priority = 3)
@@ -57,6 +56,6 @@ public class MailFunctionalityTest extends BaseTest {
     @Test(dependsOnMethods = {"loginTest"}, priority = 4)
     public void logoutTest() {
         mainPage = new MainPage(driver);
-        mainPage.logout();
+        mainPage.logout().verifyUserIsLoggedOut();
     }
 }
