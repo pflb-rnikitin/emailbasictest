@@ -25,7 +25,7 @@ public class MailFunctionalityTest extends BaseTest {
     private String to = "enthao@gmail.com";
     private String subject = getTimeStamp();
     private String content = "message body";
-    LoginPage loginPage;
+    private LoginPage loginPage;
 
     @Test
     public void loginTest() {
