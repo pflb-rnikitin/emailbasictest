@@ -32,34 +32,19 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get(Constants.BASE_URL);
-        loginPage = new LoginPage(driver);
-        mainPage = new MainPage(driver);
-        draftsPage = new DraftsPage(driver);
         sentPage = new SentPage(driver);
-        log.info("<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>");
     }
 
-    protected static void click(WebElement element) {
-        String title = element.toString();
-        String message = String.format("Click on element %s", title);
+    protected static void click(WebElement element, String title) {
+        String message = String.format("Клик по элементу %s", title);
         log.info(message);
         element.click();
     }
 
-    protected static void sendKeys(WebElement element, String text) {
-        String title = element.toString();
-        String message = String.format("Enter %s in element %s", text, title);
+    protected static void sendKeys(WebElement element, String text, String title) {
+        String message = String.format("Ввод %s в элемент %s", text, title);
         log.info(message);
         element.sendKeys(text);
-    }
-
-    protected static void assertThat(ExpectedCondition<Boolean> condition) throws TimeoutException {
-        try {
-            wait.until(condition);
-        } catch (TimeoutException e) {
-            log.error(e);
-            throw e;
-        }
     }
 
     protected static void refresh() {
